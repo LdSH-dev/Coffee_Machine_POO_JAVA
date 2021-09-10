@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class TelaCafeteira
 {
     private Cafeteira cf;
+    
 
     public TelaCafeteira(Cafeteira cf)
     {
@@ -50,7 +51,7 @@ public class TelaCafeteira
             System.out.println(selectUsuario);
             user = sc1.next().charAt(0);
             
-            while (user != '1' && user != '2' && user != '3'){
+            while (user != '1' || user != '2' || user != '3'){
             if (user == '1'){
                 cf.setUserAtivo(cf.getUser1());
             }
@@ -64,6 +65,15 @@ public class TelaCafeteira
                   System.out.println("Digite um usuário válido!");
         }
             }
+            
+            System.out.println("Digite a capacidade do reservatorio de café (em g): ");
+            int inputCafe = sc1.nextInt();
+            System.out.println("Digite a capacidade do reservatório de água (em mL): ");
+            int inputAgua = sc1.nextInt();
+            
+            Container c1 = new Container(inputCafe,inputAgua);
+            
+            
             System.out.println(menu);
             op = sc1.next().toLowerCase().charAt(0);
 
@@ -81,7 +91,7 @@ public class TelaCafeteira
             else if (op == 'c')
             {
                 //boolean sucesso = cf.servirCafeCurto();
-                if (cf.servirCafeCurto())
+                if (c1.reservatorioAgua.consumir(cf.getAguaCurto()) && c1.reservatorioCafe.consumir(cf.getCafeCurto()))
                 {
                     System.out.println("Café curto servido");
                 }
@@ -93,7 +103,7 @@ public class TelaCafeteira
             else if (op == 'l')
             {
                 //boolean sucesso = cf.servirCafeCurto();
-                if (cf.servirCafeLongo())
+                if (c1.reservatorioAgua.consumir(cf.getAguaLongo()) && c1.reservatorioCafe.consumir(cf.getCafeLongo()))
                 {
                     System.out.println("Café longo servido");
                 }
@@ -104,18 +114,18 @@ public class TelaCafeteira
             }
             else if (op == 'a')
             {
-                cf.abastecerAgua();
+                c1.reservatorioAgua.abastecer(c1.reservatorioAgua.verificaCapacidade());
                 System.out.println("Água abastecida");
             }
             else if (op == 'g')
             {
-                cf.abastecerCafe();
+                c1.reservatorioCafe.abastecer(c1.reservatorioCafe.verificaCapacidade());
                 System.out.println("Café abastecido");
             }
             else if (op == 's')
             {
-                System.out.println("Estoque Café___________ "+cf.getNivelCafe() );
-                System.out.println("Estoque Água___________ "+cf.getNivelAgua() );
+                System.out.println("Estoque Café___________ "+c1.reservatorioCafe.verificaNivel());
+                System.out.println("Estoque Água___________ "+c1.reservatorioAgua.verificaNivel());
                 System.out.println("Contador Cafés Curtos__ "+cf.getContadorCafeCurto());
                 System.out.println("Contador Cafés Longos__ "+cf.getContadorCafeLongo());
             }

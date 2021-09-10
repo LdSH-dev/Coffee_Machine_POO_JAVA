@@ -4,8 +4,6 @@ public class Cafeteira
 {
     private String modelo;
     private boolean ligado;
-    private int nivelAgua; //ml
-    private int nivelCafe; //gr
     private int contadorCafeCurto;
     private int contadorCafeLongo;
     private int CafeCurto;
@@ -21,8 +19,6 @@ public class Cafeteira
     {
         this.modelo = modelo;
         this.ligado = false;
-        this.nivelAgua = 0;
-        this.nivelCafe = 0;
         this.contadorCafeCurto = 0;
         this.contadorCafeLongo = 0;
         this.CafeCurto = 20;
@@ -39,68 +35,6 @@ public class Cafeteira
     public String getModelo()
     {
         return modelo;
-    }
-    
-    public void abastecerAgua()
-    {
-       
-        // considerando que cabem 2 litros
-        // considerando que vou encher até o limite
-        nivelAgua = 2000;
-    }
-
-    public void abastecerCafe()
-    {
-        // considerando que cabe 1 kg de café
-        // encher até o limite máximo de 1 kg
-        nivelCafe = 1000;
-    }
-    
-    public boolean servirCafeCurto()
-    {
-        boolean ok = false;
-        if (nivelCafe >= CafeCurto &&
-            nivelAgua >= AguaCurto && 
-            isLigado())
-        {
-            nivelCafe -= CafeCurto;
-            nivelAgua -= AguaCurto;
-            contadorCafeCurto ++;
-            ok = true;
-        }
-        return ok;
-    }
-    
-    public boolean servirCafeLongo()
-    {
-        boolean ok = false;
-        if (nivelCafe >= CafeLongo && 
-            nivelAgua >= AguaLongo && 
-            isLigado())
-        {
-            nivelCafe -= CafeLongo;
-            nivelAgua -= AguaLongo;
-            contadorCafeLongo ++;
-            ok = true;
-        }
-        return ok;
-    }
-
-    /* MÉTODOS
-    abastacerAgua
-    abastecerCafe
-    servirCafeCurto
-    servirCafeLongo
-    */
-
-    public int getNivelAgua()
-    {
-        return nivelAgua;
-    }
-
-    public int getNivelCafe()
-    {
-        return nivelCafe;
     }
 
     public boolean isLigado()
